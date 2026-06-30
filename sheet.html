@@ -1,0 +1,669 @@
+<!-- TODO:
+	- Add moves
+		- Will want to have some way to select a move from a dropdown, and then have it pull data from the sheetworker?
+		- Could instead have a repository of moves, and figure out how compendium dragging works (if that's even something I'm able to do)
+		- If nothing else, having an external searchable repo of moves and a way to paste them wholesale into the game
+	- Add Friendship Tracking
+	- Add Adventure Tokens
+	- Add Conditions
+	- Add Inventory
+	- Add Abilities, Features, and Rare Qualities section
+	- Initiative Button
+		- 2d6 + @{spe_mod} &{tracker}
+		- Can this be made to only work when a token is selected?
+-->
+<div id="root">
+	<div id="col_left">
+		<img id="logo" src="https://images.squarespace-cdn.com/content/v1/687138536b4149458b52fd07/24dbe7c6-081a-4ed2-9bf3-834366ad32e2/ExplorersLogov2Green.png?format=1500w"/>
+		<div id="avatar_container">
+			<img name="attr_character_avatar">
+			<span>APPEARANCE</span>
+		</div>
+		<div id="character_info" class="group_box">
+			<p>Species</p>
+			<input id="species" type="text" name="attr_species" title="@{species}" value="" />
+			<p>Type(s)</p>
+			<div id="type_selects" class="two_wide">
+				<img id="type_1" name="attr_type_1_url" class="type_display" />
+				<select id="type_1_select" name="attr_type_1" title="@{type_1}" class="type_select">
+					<option value="Unset"></option>
+					<option value="Normal">Normal</option>
+					<option value="Fighting">Fighting</option>
+					<option value="Flying">Flying</option>
+					<option value="Poison">Poison</option>
+					<option value="Ground">Ground</option>
+					<option value="Rock">Rock</option>
+					<option value="Bug">Bug</option>
+					<option value="Ghost">Ghost</option>
+					<option value="Steel">Steel</option>
+					<option value="Fire">Fire</option>
+					<option value="Water">Water</option>
+					<option value="Grass">Grass</option>
+					<option value="Electric">Electric</option>
+					<option value="Psychic">Psychic</option>
+					<option value="Ice">Ice</option>
+					<option value="Dragon">Dragon</option>
+					<option value="Dark">Dark</option>
+					<option value="Fairy">Fairy</option>
+					<option value="Stellar">Stellar</option>
+					<option value="???">???</option>
+				</select>
+				<img id="type_2" name="attr_type_2_url" class="type_display" />
+				<select id="type_2_select" name="attr_type_2" title="@{type_2}" class="type_select">
+					<option value="Unset"></option>
+					<option value="Normal">Normal</option>
+					<option value="Fighting">Fighting</option>
+					<option value="Flying">Flying</option>
+					<option value="Poison">Poison</option>
+					<option value="Ground">Ground</option>
+					<option value="Rock">Rock</option>
+					<option value="Bug">Bug</option>
+					<option value="Ghost">Ghost</option>
+					<option value="Steel">Steel</option>
+					<option value="Fire">Fire</option>
+					<option value="Water">Water</option>
+					<option value="Grass">Grass</option>
+					<option value="Electric">Electric</option>
+					<option value="Psychic">Psychic</option>
+					<option value="Ice">Ice</option>
+					<option value="Dragon">Dragon</option>
+					<option value="Dark">Dark</option>
+					<option value="Fairy">Fairy</option>
+					<option value="Stellar">Stellar</option>
+					<option value="???">???</option>
+				</select>
+			</div>
+			<p>Class</p>
+			<div id="class_info">
+				<select name="attr_class">
+					<option value="None"></option>
+					<option value="Explorer">Explorer</option>
+					<option value="Mission Expert">Mission Expert</option>
+					<option value="Strategist">Strategist</option>
+					<option value="Icon">Icon</option>
+					<option value="Guardian">Guardian</option>
+					<option value="Brawler">Brawler</option>
+					<option value="Specialist">Specialist</option>
+				</select>
+				<span>Lv.</span>
+				<input name="attr_level" type="text" value=1 />
+			</div>
+			<p>Specialization</p>
+			<select name="attr_specialization" title="@{specialization}" class="full_width">
+				<option value="None"></option>
+
+				<option disabled class="optgroup">Explorer</option>
+				<option value="Survivalist">Survivalist</option>
+				<option value="Treasure Hunter">Treasure Hunter</option>
+				
+				<option disabled class="optgroup">Mission Expert</option>
+				<option value="First Responder">First Responder</option>
+				<option value="Bounty Hunter">Bounty Hunter</option>
+				
+				<option disabled class="optgroup">Strategist</option>
+				<option value="Tactician">Tactician</option>
+				<option value="Sharpshooter">Sharpshooter</option>
+
+				<option disabled class="optgroup">Icon</option>
+				<option value="Team Leader">Team Leader</option>
+				<option value="Silver-Tongued">Silver-Tongued</option>
+
+				<option disabled class="optgroup">Guardian</option>
+				<option value="Aegis">Aegis</option>
+				<option value="Ward">Ward</option>
+
+				<option disabled class="optgroup">Brawler</option>
+				<option value="Rapid">Rapid</option>
+				<option value="Fury">Fury</option>
+
+				<option disabled class="optgroup">Specialist</option>
+				<option value="Swift">Swift</option>
+				<option value="Patient">Patient</option>
+			</select>
+			<p>Nature & Aura</p>
+			<div id="nature_aura">
+				<img name="attr_nature_aura_display_url" class="nature_aura_display" />
+				<input name="attr_aura" type=hidden />
+				<select name="attr_nature" class="nature_select" title="@{nature} @{aura}">
+					<option value="Unset"></option>
+					<option value="Adamant">Adamant</option>
+					<option value="Bashful">Bashful</option>
+					<option value="Bold">Bold</option>
+					<option value="Brave">Brave</option>
+					<option value="Calm">Calm</option>
+					<option value="Careful">Careful</option>
+					<option value="Docile">Docile</option>
+					<option value="Gentle">Gentle</option>
+					<option value="Hardy">Hardy</option>
+					<option value="Hasty">Hasty</option>
+					<option value="Impish">Impish</option>
+					<option value="Jolly">Jolly</option>
+					<option value="Lax">Lax</option>
+					<option value="Lonely">Lonely</option>
+					<option value="Mild">Mild</option>
+					<option value="Modest">Modest</option>
+					<option value="Naive">Naive</option>
+					<option value="Naughty">Naughty</option>
+					<option value="Quiet">Quiet</option>
+					<option value="Quirky">Quirky</option>
+					<option value="Rash">Rash</option>
+					<option value="Relaxed">Relaxed</option>
+					<option value="Sassy">Sassy</option>
+					<option value="Serious">Serious</option>
+					<option value="Timid">Timid</option>
+				</select>
+			</div>
+			<p>Origin</p>
+			<input id="origin" type="text" name="attr_origin" title="@{origin}" value="" />
+			<p>Held Item</p>
+			<input id="held_item" type="text" name="attr_held_item" title="@{held_item}" value="" />
+		</div>
+		<!--
+		<div id="conditions" class="group_box">
+			<p>Conditions</p>
+			<input id="conditions" placeholder="conditions" />
+		</div>-->
+	</div>
+	<div id="col_right">
+		<input id="name" type=text name="attr_character_name" />
+		<p>Character Name</p>
+		<div id="stats" class="group_box">
+			<div id="hp_col" class="stat_column">
+				<div class="stat_name"><span class="header">HP</span></div>
+				<div class="stat_box">
+					<div class="baseattr_box centre_wrapper">
+						<!-- TODO: When hovering over the stats, the entire box gets bigger to accommodate the two inputs. This is not great -->
+						<div class="half_centre_wrapper">
+							<input class="baseattr" type=text name="attr_hp_current" title="@{hp_current}" value="0" />
+							<span class="finalattr_shared" name="attr_hp_current"></span>
+						</div>
+						<span class="finalattr_shared">/</span>
+						<div class="half_centre_wrapper">
+							<input class="baseattr" type=text name="attr_hp" title="@{hp}" value="0" readonly/>
+							<span class="finalattr_shared" name="attr_hp"></span>
+						</div>
+					</div>
+					<div class="attrmod_box">
+						<input type="hidden" name="attr_hp_mod" value="0" />
+						<span class="attr_mod" name="attr_hp_mod" title="@{hp_mod}"></span>
+					</div>
+				</div>
+				<div class="triangle" />
+				<div class="stat_name"><span>Endurance</span></div>
+				<div class="stat_box">
+					<div class="centre_wrapper">
+						<button type="roll" name="roll_Endurance" value="&{template:default} {{name=@{character_name} tests their endurance!}} {{Endurance=[[@{endurance_prof}d6 + @{hp_mod}]]}}"><span name="attr_endurance_prof" />d6 + <span name="attr_hp_mod" /></button>
+					</div>
+					<div class="proficiency_box">
+						<button type="action" name="act_endurance_prof_button" class="proficiency_controls" />
+						<input type="hidden" name="attr_endurance_prof" value="1" class="proficiency_controls" />
+						<div class="proficiency_none" />
+						<div class="proficiency_minor" />
+						<div class="proficiency_major" />
+					</div>
+				</div>
+			</div>
+			<div id="atk_col" class="stat_column">
+				<div class="stat_name"><span class="header">ATK</span></div>
+				<div class="stat_box">
+					<div class="baseattr_box centre_wrapper">
+						<input class="baseattr" type=text name="attr_atk_base" title="@{atk}" value="5" />
+						<input type="hidden" name="attr_atk" value="5" />
+						<span class="finalattr" name="attr_atk"></span>
+					</div>
+					<div class="attrmod_box">
+						<input type="hidden" name="attr_atk_mod" value="0" />
+						<span class="attr_mod" name="attr_atk_mod" title="@{atk_mod}"></span>
+					</div>
+				</div>
+				<div class="triangle" />
+				<div class="stat_name"><span>Strength</span></div>
+				<div class="stat_box">
+					<div class="centre_wrapper">
+						<button type="roll" name="roll_Strength" value="&{template:default} {{name=@{character_name} tests their strength!}} {{Strength=[[@{strength_prof}d6 + @{atk_mod}]]}}"><span name="attr_strength_prof" />d6 + <span name="attr_atk_mod" /></button>
+					</div>
+					<div class="proficiency_box">
+						<button type="action" name="act_strength_prof_button" class="proficiency_controls" />
+						<input type="hidden" name="attr_strength_prof" value="1" class="proficiency_controls" />
+						<div class="proficiency_none" />
+						<div class="proficiency_minor" />
+						<div class="proficiency_major" />
+					</div>
+				</div>
+			</div>
+			<div id="def_col" class="stat_column">
+				<div class="stat_name"><span class="header">DEF</span></div>
+				<div class="stat_box">
+					<div class="baseattr_box centre_wrapper">
+						<input class="baseattr" type=text name="attr_def_base" title="@{def}" value="5" />
+						<input type="hidden" name="attr_def" value="5" />
+						<span class="finalattr" name="attr_def"></span>
+					</div>
+					<div class="attrmod_box">
+						<input type="hidden" name="attr_def_mod" value="0" />
+						<span class="attr_mod" name="attr_def_mod" title="@{def_mod}"></span>
+					</div>
+				</div>
+				<div class="triangle" />
+				<!--<p class="stat_name">Phys. Status Resistance</p>-->
+				<div class="stat_name"><span>Phys. Status<br>Resistance</span></div>
+				<div class="stat_box">
+					<div class="centre_wrapper">
+						<button type="roll" name="roll_PhysStatusRes" value="&{template:default} {{name=@{character_name} attempts to resist a physical status!}} {{Phys. Status Resistance=[[@{phys_status_res_prof}d6 + @{def_mod}]]}}"><span name="attr_phys_status_res_prof" />d6 + <span name="attr_def_mod" /></button>
+					</div>
+					<div class="proficiency_box">
+						<button type="action" name="act_phys_status_res_prof_button" class="proficiency_controls" />
+						<input type="hidden" name="attr_phys_status_res_prof" value="1" class="proficiency_controls" />
+						<div class="proficiency_none" />
+						<div class="proficiency_minor" />
+						<div class="proficiency_major" />
+					</div>
+				</div>
+			</div>
+			<div id="sp_atk_col" class="stat_column">
+				<div class="stat_name"><span class="header">SP. ATK</span></div>
+				<div class="stat_box">
+					<div class="baseattr_box centre_wrapper">
+						<input class="baseattr" type=text name="attr_sp_atk_base" title="@{sp_atk}" value="5" />
+						<input type="hidden" name="attr_sp_atk" value="5" />
+						<span class="finalattr" name="attr_sp_atk"></span>
+					</div>
+					<div class="attrmod_box">
+						<input type="hidden" name="attr_sp_atk_mod" value="0" />
+						<span class="attr_mod" name="attr_sp_atk_mod" title="@{sp_atk_mod}"></span>
+					</div>
+				</div>
+				<div class="triangle" />
+				<div class="stat_name"><span>Awareness</span></div>
+				<div class="stat_box">
+					<div class="centre_wrapper">
+						<button type="roll" name="roll_Awareness" value="&{template:default} {{name=@{character_name} takes a look around!}} {{Awareness=[[@{awareness_prof}d6 + @{sp_atk_mod}]]}}"><span name="attr_awareness_prof" />d6 + <span name="attr_sp_atk_mod" /></button>
+					</div>
+					<div class="attrmod_box">
+						<input type="hidden" name="attr_visibility_mod" value="0" />
+						<span class="attr_mod" name="attr_visibility_mod" title="@{visibility_mod}"></span>
+					</div>
+					<div class="proficiency_box">
+						<button type="action" name="act_awareness_prof_button" class="proficiency_controls" />
+						<input type="hidden" name="attr_awareness_prof" value="1" class="proficiency_controls" />
+						<div class="proficiency_none" />
+						<div class="proficiency_minor" />
+						<div class="proficiency_major" />
+					</div>
+				</div>
+			</div>
+			<div id="sp_def_col" class="stat_column">
+				<div class="stat_name"><span class="header">SP. DEF</span></div>
+				<div class="stat_box">
+					<div class="baseattr_box centre_wrapper">
+						<input class="baseattr" type=text name="attr_sp_def_base" title="@{sp_def}" value="5" />
+						<input type="hidden" name="attr_sp_def" value="5" />
+						<span class="finalattr" name="attr_sp_def"></span>
+					</div>
+					<div class="attrmod_box">
+						<input type="hidden" name="attr_sp_def_mod" value="0" />
+						<span class="attr_mod" name="attr_sp_def_mod" title="@{sp_def_mod}"></span>
+					</div>
+				</div>
+				<div class="triangle" />
+				<div class="stat_name"><span>Sp. Status<br>Resistance</span></div>
+				<div class="stat_box">
+					<div class="centre_wrapper">
+						<button type="roll" name="roll_SpStatusRes" value="&{template:default} {{name=@{character_name} attempts to resist a special status!}} {{Sp. Status Resistance=[[@{sp_status_res_prof}d6 + @{sp_def_mod}]]}}"><span name="attr_sp_status_res_prof" />d6 + <span name="attr_sp_def_mod" /></button>
+					</div>
+					<div class="proficiency_box">
+						<button type="action" name="act_sp_status_res_prof_button" class="proficiency_controls" />
+						<input type="hidden" name="attr_sp_status_res_prof" value="1" class="proficiency_controls" />
+						<div class="proficiency_none" />
+						<div class="proficiency_minor" />
+						<div class="proficiency_major" />
+					</div>
+				</div>
+			</div>
+			<div id="spe_col" class="stat_column">
+				<div class="stat_name"><span class="header">SPE</span></div>
+				<div class="stat_box">
+					<div class="baseattr_box centre_wrapper">
+						<input class="baseattr" type=text name="attr_spe_base" title="@{spe}" value="5" />
+						<input type="hidden" name="attr_spe" value="5" />
+						<span class="finalattr" name="attr_spe"></span>
+					</div>
+					<div class="attrmod_box">
+						<input type="hidden" name="attr_spe_mod" value="0" />
+						<span class="attr_mod" name="attr_spe_mod" title="@{spe_mod}"></span>
+					</div>
+				</div>
+				<div class="triangle" />
+				<div class="stat_name"><span>Movement</span></div>
+				<div class="stat_box">
+					<div class="centre_wrapper">
+						<button type="roll" name="roll_Movement" value="&{template:default} {{name=@{character_name} tests their athleticism!}} {{Movement=[[@{movement_prof}d6 + @{spe_mod}]]}}"><span name="attr_movement_prof" />d6 + <span name="attr_spe_mod" /></button>
+					</div>
+					<div class="attrmod_box">
+						<input type="hidden" name="attr_movement_tiles" value="0" />
+						<span class="attr_mod" name="attr_movement_tiles" title="@{movement_tiles}"></span>
+					</div>
+					<div class="proficiency_box">
+						<button type="action" name="act_movement_prof_button" class="proficiency_controls" />
+						<input type="hidden" name="attr_movement_prof" value="1" class="proficiency_controls" />
+						<div class="proficiency_none" />
+						<div class="proficiency_minor" />
+						<div class="proficiency_major" />
+					</div>
+				</div>
+			</div>
+			<div id="iq_col" class="stat_column">
+				<div class="stat_name"><span class="header">IQ</span></div>
+				<div class="stat_box">
+					<div class="baseattr_box centre_wrapper">
+						<input class="baseattr" type=text name="attr_iq_base" title="@{iq}" value="5" />
+						<input type="hidden" name="attr_iq" value="5" />
+						<span class="finalattr" name="attr_iq"></span>
+					</div>
+					<div class="attrmod_box">
+						<input type="hidden" name="attr_iq_mod" value="0" />
+						<span class="attr_mod" name="attr_iq_mod" title="@{iq_mod}"></span>
+					</div>
+				</div>
+				<div class="triangle" />
+				<div class="stat_name"><span>IQ Skills</span></div>
+			</div>
+		</div>
+		<div id="iq_skills" class="group_box">
+			<div id="iq_skills_social" class="iq_skills_column">
+				<div class="stat_name"><span class="header">Social</span></div>
+				<div class="iq_skills_group_box">
+					<div>
+						<div class="stat_name"><span>Influence</span></div>
+						<div class="stat_box">
+							<div class="centre_wrapper">
+								<button type="roll" name="roll_Influence" value="&{template:default} {{name=@{character_name} attempts to influence!}} {{Influence=[[@{influence_prof}d6 + @{iq_mod}]]}}"><span name="attr_influence_prof" />d6 + <span name="attr_iq_mod" /></button>
+							</div>
+							<div class="proficiency_box">
+								<button type="action" name="act_influence_prof_button" class="proficiency_controls" />
+								<input type="hidden" name="attr_influence_prof" value="1" class="proficiency_controls" />
+								<div class="proficiency_none" />
+								<div class="proficiency_minor" />
+								<div class="proficiency_major" />
+							</div>
+						</div>
+					</div>
+					<div>
+						<div class="stat_name"><span>Deceive</span></div>
+						<div class="stat_box">
+							<div class="centre_wrapper">
+								<button type="roll" name="roll_Deceive" value="&{template:default} {{name=@{character_name} attempts to deceive!}} {{Deceive=[[@{deceive_prof}d6 + @{iq_mod}]]}}"><span name="attr_deceive_prof" />d6 + <span name="attr_iq_mod" /></button>
+							</div>
+							<div class="proficiency_box">
+								<button type="action" name="act_deceive_prof_button" class="proficiency_controls" />
+								<input type="hidden" name="attr_deceive_prof" value="1" class="proficiency_controls" />
+								<div class="proficiency_none" />
+								<div class="proficiency_minor" />
+								<div class="proficiency_major" />
+							</div>
+						</div>
+					</div>
+					<div>
+						<div class="stat_name"><span>Intuition</span></div>
+						<div class="stat_box">
+							<div class="centre_wrapper">
+								<button type="roll" name="roll_Intuition" value="&{template:default} {{name=@{character_name} follows their intuition!}} {{Intuition=[[@{intuition_prof}d6 + @{iq_mod}]]}}"><span name="attr_intuition_prof" />d6 + <span name="attr_iq_mod" /></button>
+							</div>
+							<div class="proficiency_box">
+								<button type="action" name="act_intuition_prof_button" class="proficiency_controls" />
+								<input type="hidden" name="attr_intuition_prof" value="1" class="proficiency_controls" />
+								<div class="proficiency_none" />
+								<div class="proficiency_minor" />
+								<div class="proficiency_major" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="iq_skills_exploration" class="iq_skills_column">
+				<div class="stat_name"><span class="header">Exploration</span></div>
+				<div class="iq_skills_group_box">
+					<div>
+						<div class="stat_name"><span>Tracking</span></div>
+						<div class="stat_box">
+							<div class="centre_wrapper">
+								<button type="roll" name="roll_Tracking" value="&{template:default} {{name=@{character_name} attempts to track!}} {{Tracking=[[@{tracking_prof}d6 + @{iq_mod}]]}}"><span name="attr_tracking_prof" />d6 + <span name="attr_iq_mod" /></button>
+							</div>
+							<div class="proficiency_box">
+								<button type="action" name="act_tracking_prof_button" class="proficiency_controls" />
+								<input type="hidden" name="attr_tracking_prof" value="1" class="proficiency_controls" />
+								<div class="proficiency_none" />
+								<div class="proficiency_minor" />
+								<div class="proficiency_major" />
+							</div>
+						</div>
+					</div>
+					<div>
+						<div class="stat_name"><span>Ecology</span></div>
+						<div class="stat_box">
+							<div class="centre_wrapper">
+								<button type="roll" name="roll_Ecology" value="&{template:default} {{name=@{character_name} studies the local ecology!}} {{Ecology=[[@{ecology_prof}d6 + @{iq_mod}]]}}"><span name="attr_ecology_prof" />d6 + <span name="attr_iq_mod" /></button>
+							</div>
+							<div class="proficiency_box">
+								<button type="action" name="act_ecology_prof_button" class="proficiency_controls" />
+								<input type="hidden" name="attr_ecology_prof" value="1" class="proficiency_controls" />
+								<div class="proficiency_none" />
+								<div class="proficiency_minor" />
+								<div class="proficiency_major" />
+							</div>
+						</div>
+					</div>
+					<div>
+						<div class="stat_name"><span>Sneak</span></div>
+						<div class="stat_box">
+							<div class="centre_wrapper">
+								<button type="roll" name="roll_Sneak" value="&{template:default} {{name=@{character_name} attempts to be sneaky!}} {{Sneak=[[@{sneak_prof}d6 + @{iq_mod}]]}}"><span name="attr_sneak_prof" />d6 + <span name="attr_iq_mod" /></button>
+							</div>
+							<div class="proficiency_box">
+								<button type="action" name="act_sneak_prof_button" class="proficiency_controls" />
+								<input type="hidden" name="attr_sneak_prof" value="1" class="proficiency_controls" />
+								<div class="proficiency_none" />
+								<div class="proficiency_minor" />
+								<div class="proficiency_major" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="iq_skills_intellect" class="iq_skills_column">
+				<div class="stat_name"><span class="header">Intellect</span></div>
+				<div class="iq_skills_group_box">
+					<div>
+						<div class="stat_name"><span>Memory</span></div>
+						<div class="stat_box">
+							<div class="centre_wrapper">
+								<button type="roll" name="roll_Memory" value="&{template:default} {{name=@{character_name} attempts to recall some information!}} {{Memory=[[@{memory_prof}d6 + @{iq_mod}]]}}"><span name="attr_memory_prof" />d6 + <span name="attr_iq_mod" /></button>
+							</div>
+							<div class="proficiency_box">
+								<button type="action" name="act_memory_prof_button" class="proficiency_controls" />
+								<input type="hidden" name="attr_memory_prof" value="1" class="proficiency_controls" />
+								<div class="proficiency_none" />
+								<div class="proficiency_minor" />
+								<div class="proficiency_major" />
+							</div>
+						</div>
+					</div>
+					<div>
+						<div class="stat_name"><span>Logic</span></div>
+						<div class="stat_box">
+							<div class="centre_wrapper">
+								<button type="roll" name="roll_Logic" value="&{template:default} {{name=@{character_name} attempts to use their logic!}} {{Logic=[[@{logic_prof}d6 + @{iq_mod}]]}}"><span name="attr_logic_prof" />d6 + <span name="attr_iq_mod" /></button>
+							</div>
+							<div class="proficiency_box">
+								<button type="action" name="act_logic_prof_button" class="proficiency_controls" />
+								<input type="hidden" name="attr_logic_prof" value="1" class="proficiency_controls" />
+								<div class="proficiency_none" />
+								<div class="proficiency_minor" />
+								<div class="proficiency_major" />
+							</div>
+						</div>
+					</div>
+					<div>
+						<div class="stat_name"><span>Traps</span></div>
+						<div class="stat_box">
+							<div class="centre_wrapper">
+								<button type="roll" name="roll_Traps" value="&{template:default} {{name=@{character_name} pulls on their knowledge of traps!}} {{Traps=[[@{traps_prof}d6 + @{iq_mod}]]}}"><span name="attr_traps_prof" />d6 + <span name="attr_iq_mod" /></button>
+							</div>
+							<div class="proficiency_box">
+								<button type="action" name="act_traps_prof_button" class="proficiency_controls" />
+								<input type="hidden" name="attr_traps_prof" value="1" class="proficiency_controls" />
+								<div class="proficiency_none" />
+								<div class="proficiency_minor" />
+								<div class="proficiency_major" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/worker">
+	['atk','def','sp_atk','sp_def','spe','iq'].forEach(attr => {
+        on(`change:${attr}_base`, () => {
+        	var name = `${attr}_base`;
+            getAttrs([name], function(v){
+            	var base_val = v[name] && !isNaN(parseInt(v[name], 10)) ? parseInt(v[name], 10) : 10;
+            	var new_vals = {};
+            	new_vals[attr] = base_val;
+            	new_vals[attr + "_mod"] = Math.ceil(base_val / 5);
+            	setAttrs(new_vals);
+            });
+        });
+    });
+
+    const class_hp = {
+    	"None": 0,
+    	"Explorer": 15,
+    	"Mission Expert": 15,
+    	"Strategist": 10,
+    	"Icon": 10,
+    	"Guardian": 20,
+    	"Brawler": 15,
+    	"Specialist": 15
+    };
+
+    ['level', 'class'].forEach((attr) =>{
+	    on(`change:${attr}`, () => {
+	    	getAttrs(["class", "level"], (v) => {
+	    		const level = v["level"] && !isNaN(parseInt(v["level"], 10)) ? parseInt(v["level"], 10) : 1;
+	    		const expl_class = v["class"] || "None";
+	    		const hp_per_level = class_hp[expl_class];
+	    		var max_hp = 10 + level * hp_per_level;
+	    		var v = {};
+	    		v["hp"] = max_hp;
+	    		v["hp_mod"] = Math.floor(Math.ceil(max_hp / 5) / 2);
+	    		setAttrs(v);
+	    	});
+	    });
+    });
+
+    ['endurance', 'strength', 'phys_status_res', 'awareness', 'sp_status_res', 'movement', 'influence', 'deceive', 'intuition', 'tracking', 'ecology', 'sneak', 'memory', 'logic', 'traps'].forEach(skill => {
+	    on(`clicked:${skill}_prof_button`, () => {
+	    	const skill_name = `${skill}_prof`;
+	    	var v2 = {};
+	    	var prof = 1;
+			getAttrs([skill_name], (v) => {
+				prof = parseInt(v[skill_name]) || 1;
+				var new_prof = (prof % 3) + 1;
+				v2[skill_name] = new_prof;
+				setAttrs(v2);
+			});
+		});
+	});
+
+	['awareness_prof', 'sp_atk_mod'].forEach((attr) => {
+		on(`change:${attr}`, () => {
+			getAttrs(["sp_atk_mod", "awareness_prof"], (v) => {
+	    		const mod = parseInt(v["sp_atk_mod"]) || 1;
+	    		const prof = parseInt(v["awareness_prof"]) || 1;
+	    		setAttrs({
+	    			"visibility_mod": 4 + Math.floor(mod / 2) + (prof - 1)
+	    		});
+	    	});
+		});
+	});
+
+	['movement_prof', 'spe_mod'].forEach((attr) => {
+		on(`change:${attr}`, () => {
+			getAttrs(["spe_mod", "movement_prof"], (v) => {
+	    		const mod = parseInt(v["spe_mod"]) || 1;
+	    		const prof = parseInt(v["movement_prof"]) || 1;
+	    		setAttrs({
+	    			"movement_tiles": 1 + Math.floor(mod / 2) + ((prof - 1) * 2)
+	    		});
+	    	});
+		});
+	});
+
+	['type_1', 'type_2'].forEach(type_slot => {
+		on(`change:${type_slot}`, () => {
+			getAttrs([type_slot], (v) => {
+				var type = v[type_slot];
+				var url = getTypeSprite(type);
+				var v = {};
+				v[`${type_slot}_url`] = url;
+				setAttrs(v);
+			})
+		});
+	});
+
+	const nature_to_aura = {
+		"Adamant": "Orange",
+		"Bashful": "Gold",
+		"Bold": "Violet",
+		"Brave": "Silver",
+		"Calm": "Olive",
+		"Careful": "Purple",
+		"Docile": "Diamond",
+		"Gentle": "Mint",
+		"Hardy": "Scarlet",
+		"Hasty": "Red",
+		"Impish": "Magenta",
+		"Jolly": "Pink",
+		"Lax": "Platinum",
+		"Lonely": "Sapphire",
+		"Mild": "Brown",
+		"Modest": "Turquoise",
+		"Naive": "White",
+		"Naughty": "Ruby",
+		"Quiet": "Blue",
+		"Quirky": "Lime",
+		"Rash": "Pearl",
+		"Relaxed": "Green",
+		"Sassy": "Yellow",
+		"Serious": "Black",
+		"Timid": "Emerald"
+	};
+
+	on("change:nature", () => {
+		getAttrs(["nature"], (v) => {
+			var nature = v["nature"];
+			var aura = nature_to_aura[nature] || "Unset";
+			var v = {}
+			v["aura"] = aura;
+			v["nature_aura_display_url"] = nature === "Unset" ? "" : `https://raw.githubusercontent.com/Enriath/pmd-explorers-sheet/refs/heads/main/img/natures/nature_${nature.toLowerCase()}.png`;
+			setAttrs(v);
+		});
+	});
+
+	function getTypeSprite(type)
+	{
+		if (type === "Unset")
+		{
+			return "";
+		}
+		if (type === "???")
+		{
+			type = "unknown";
+		}
+		return `https://raw.githubusercontent.com/Enriath/pmd-explorers-sheet/refs/heads/main/img/types/type_${type.toLowerCase()}.png`;
+	}
+
+
+</script>

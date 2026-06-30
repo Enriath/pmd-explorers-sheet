@@ -1,0 +1,480 @@
+div#root
+{
+	background-color: #dddddd;
+	color: #222222;
+	width: auto;
+	height: auto;
+	padding: 1.5%;
+}
+
+div#col_left
+{
+	width: 18%;
+	display: inline-block;
+	vertical-align: top;
+	padding-right: 1%;
+}
+
+div#col_right
+{
+	width: 79%;
+	display: inline-block;
+	vertical-align: top;
+	padding-left: 1%;
+}
+
+div.group_box
+{
+	border: 5px solid black;
+	padding: 1%;
+}
+
+div#stats
+{
+	display: flex;
+	justify-content: center;
+	flex-direction: row;
+	align-items: flex-start;
+	margin-bottom: 0.5em;
+}
+
+div.stat_column
+{
+	width: 12.5%;
+	display: inline-flex;
+	margin: 0 1% 1% 1%;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+}
+
+p
+{
+	text-align: center;
+	font-size: 18px;
+	margin: 0;
+}
+
+.baseattr, select.type_select, select.nature_select
+{
+	opacity: 0;
+	height: 0px;
+	width: 0px;
+	pointer-events: none;
+	display: inline;
+	position: absolute;
+	text-align: center;
+}
+
+span.finalattr 
+{
+	font-size: 4cqw;
+	line-height: 40px;
+}
+
+span.finalattr_shared
+{
+	font-size: 2cqw;
+	line-height: 40px;
+}
+
+input.baseattr
+{
+	text-align: center;
+}
+
+div.baseattr_box:hover .baseattr,
+div.baseattr_box .baseattr:focus
+{
+	opacity: 1;
+	height: 20px;
+	width: 30px;
+	pointer-events: auto;
+	position: static;
+}
+
+div#type_selects:hover select.type_select,
+div#type_selects select.type_select:focus
+{
+	opacity: 1;
+	height: 2em;
+	width: 49%;
+	margin: 0.25%;
+	pointer-events: auto;
+	position: static;
+}
+
+div#nature_aura:hover select.nature_select,
+div#nature_aura select.nature_select:focus
+{
+	opacity: 1;
+	height: 2em;
+	width: 99.5%;
+	margin: 0.25%;
+	pointer-events: auto;
+	position: static;
+}
+
+select.full_width
+{
+	height: 2em;
+	width: 99.5%;
+	margin: 0.25%;
+}
+
+option.optgroup
+{
+	background-color: #444444;
+	color: #dddddd;
+	text-align: center;
+}
+
+
+div.baseattr_box:hover span.finalattr,
+div.baseattr_box .baseattr:focus ~ span.finalattr,
+div.baseattr_box:hover span.finalattr_shared,
+div.baseattr_box .baseattr:focus ~ span.finalattr_shared,
+div#type_selects:hover img.type_display,
+div#type_selects select.type_select:focus ~ img.type_display,
+div#nature_aura:hover img.nature_aura_display,
+div#nature_aura select.nature_select:focus ~ img.nature_aura_display
+{
+	display: none;
+}
+
+div.centre_wrapper
+{
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: row;
+}
+
+div.half_centre_wrapper
+{
+	width: 45%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+div.attrmod_box
+{
+	width: 35%;
+	height: 35%;
+	border: 1px solid #666;
+	z-index: 2;
+	position: absolute;
+	top: 82.5%;
+	left: 0;
+	right: 0;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 2cqw;
+}
+
+div.proficiency_box
+{
+	/* Position slightly closer for a better look */
+	width: 40%;
+	height: 40%;
+	top: 75%;
+	left: 75%;
+	z-index: 2;
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+button.proficiency_controls
+{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	padding: 0;
+	margin: 0;
+	border: 0;
+	background-color: #00000000;
+	z-index: 3;
+}
+
+div.stat_box
+{
+	position: relative;
+	border: 3px solid black;
+	border-bottom: 5px solid black;
+	border-top: 5px solid black;
+	width: 100%;
+	aspect-ratio: 1 / 1;
+	text-align: center;
+}
+
+
+div.triangle
+{
+	width: 0;
+	height: 0;
+	border-left: 2cqw solid transparent;
+	border-right: 2cqw solid transparent;
+	border-top: 1.5cqw solid #555;
+	margin-top: 2cqw;
+}
+
+div.proficiency_none
+{
+	position: relative;
+	bottom: -2px;
+	height: 16px;
+	width: 16px;
+	border-radius: 50%;
+	background-color: #ffffff;
+	border-color: #000000;
+	border: 2px solid black;
+}
+
+div.proficiency_box input.proficiency_controls[value="1"] ~ :not(.proficiency_controls):not(.proficiency_none)
+{
+	display: none;
+}
+
+div.proficiency_box input.proficiency_controls[value="2"] ~ :not(.proficiency_controls):not(.proficiency_minor)
+{
+	display: none;
+}
+
+div.proficiency_box input.proficiency_controls[value="3"] ~ :not(.proficiency_controls):not(.proficiency_major)
+{
+	display: none;
+}
+
+div.proficiency_minor
+{
+	width: 32px;
+	height: 32px;
+	content: url(https://raw.githubusercontent.com/Enriath/pmd-explorers-sheet/refs/heads/main/img/proficiency/minor.png);
+}
+
+div.proficiency_major
+{
+	width: 32px;
+	height: 32px;
+	content: url(https://raw.githubusercontent.com/Enriath/pmd-explorers-sheet/refs/heads/main/img/proficiency/major.png);
+}
+
+div.stat_name
+{
+	width: 100%;
+	height: 25px;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+}
+
+div.stat_name span
+{
+	text-align: center;
+	align-self: flex-end;
+	line-height: 1.2cqw;
+	font-size: 1.2cqw;
+}
+
+div.stat_name span.header
+{
+	font-size: 2cqw;
+	line-height: 2cqw;
+}
+
+div#col_left input
+{
+	width: 95%;
+}
+
+button[type=roll]::before
+{
+	content: '' !important;
+}
+
+button[type=roll]
+{
+	padding: 0.2cqw 0.2cqh !important;
+	width: 6cqw;
+	height: 2.5cqw;
+	font-size: 1.5cqw !important;
+}
+
+div#iq_skills
+{
+	display: flex;
+	justify-content: center;
+	flex-direction: row;
+}
+
+div.iq_skills_column
+{
+	width: 33%;
+	display: inline-flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+}
+
+div.iq_skills_group_box
+{
+	display: flex;
+	column-count: 2;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+div.iq_skills_group_box > div
+{
+	margin-left: 5%;
+	margin-right: 5%;
+	width: 35%;
+	aspect-ratio: 1 / 1;
+}
+
+input#name
+{
+	text-align: center;
+	width: 100%;
+}
+
+div#avatar_container
+{
+	width: 95%;
+	height: auto;
+	aspect-ratio: 1/1;
+	padding: 1%;
+	margin-bottom: 0.5em;
+	font-size: 0.75em;
+	text-align: center;
+}
+
+div#avatar_container img
+{
+	border-width: 0.9em 4px 1.5em 4px;
+	border-color: black;
+	border-style: solid;
+	aspect-ratio: 1 / 1;
+	object-fit: contain;
+	background-color: black;
+	width: 100%;
+	height: 100%;
+}
+
+div#avatar_container span
+{
+	color: white;
+	position: relative;
+	bottom: 1.5em;
+}
+
+div#character_info
+{
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	padding-bottom: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+div#character_info p
+{
+	margin-top: 0.5em;
+}
+
+div.two_wide
+{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	margin: 0 2%;
+}
+
+img.type_display
+{
+	display: inline;
+	width: 49%;
+	height: auto;
+	margin: 0.25%;
+	object-fit: contain;
+	aspect-ratio: 16 / 7;
+}
+
+img.nature_aura_display
+{
+	display: inline;
+	width: 99%;
+	height: auto;
+	margin: 0.25%;
+	object-fit: contain;
+	aspect-ratio: 8 / 3;
+}
+
+div#nature_aura
+{
+	width: 100%;
+	height: 60px;
+}
+
+img.type_display:not([src]),
+img.type_display[src=""],
+img.nature_aura_display:not([src]),
+img.nature_aura_display[src=""]
+{
+	display: none;
+}
+
+div#type_selects
+{
+	width: 100%;
+	height: 40px;
+}
+
+div#class_info
+{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+div#class_info select
+{
+	width: 63%;
+	height: auto;
+	margin-bottom: 0;
+	padding: 2px 0 2px 2px;
+	appearance: none;
+	font-size: 1.2cqw;
+	text-align: center;
+}
+
+div#class_info input
+{
+	width: 19%;
+	font-size: 1.2cqw;
+	appearance: none;
+	text-align: center;
+	padding: 2px 0;
+}
+
+div#class_info span
+{
+	margin-right: 0.5%;
+	margin-left: 2%;
+	font-size: 1.2cqw;
+}
